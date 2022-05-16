@@ -1,0 +1,31 @@
+﻿<UserControl  x:Class="LicenseManager.MultiselectComboBox"
+              x:Name="MyControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LicenseManager"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             
+             xmlns:vm="clr-namespace:LicenseManager"
+             d:DataContext ="{d:DesignInstance {x:Type vm:MultiselectComboBox}, 
+        IsDesignTimeCreatable=True}">
+    <Grid>
+        <ListBox x:Name="ListView" HorizontalAlignment="Stretch"
+                 ItemsSource="{Binding ItemSource, ElementName=MyControl}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox IsChecked="False" />
+                        <TextBlock Grid.Column="1" Text=""/> <!--Don' know how to bind dynamically the corresponding object-->
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

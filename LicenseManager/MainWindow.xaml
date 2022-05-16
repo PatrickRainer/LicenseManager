@@ -1,0 +1,97 @@
+﻿<Window x:Class="LicenseManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LicenseManager"
+        mc:Ignorable="d"
+        Title="License Manager" Height="800" Width="800"
+        WindowState="Maximized"
+        
+        xmlns:vm="clr-namespace:LicenseManager"
+        d:DataContext ="{d:DesignInstance {x:Type vm:MainWindow}, 
+        IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1">
+            <Label Content="Private Key" />
+            <TextBox x:Name="PrivateKeyTextBox" TextWrapping="Wrap" />
+            <Label Content="Public Key" />
+            <TextBox x:Name="PublicKeyTextBox" />
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Password"></Label>
+                <PasswordBox x:Name="KeyPasswordTextBox"
+                             MinWidth="120" />
+                <Button x:Name="CreateKeysButton" Content="Create Keys"
+                        Click="CreateKeysButton_OnClick" />
+            </StackPanel>
+            <Label Content="Output Path" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="OutputPathTextBox" MinWidth="240" />
+                <Button x:Name="OpenOutputPathButton" Content="Open Path"
+                        Click="OpenOutputPathButton_OnClick"/>
+                <Button x:Name="SetNewOutputPathButton" Content="Set"
+                        Click="SetNewOutputPathButton_OnClick" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
+            <Label Content="Customer Name" />
+            <TextBox x:Name="CustomerNameTextBox"
+                     Text="{Binding CustomerName}"/>
+            <Label Content="Customer E-Mail" />
+            <TextBox x:Name="CustomerEmailTextBox"
+                     Text="{Binding CustomerEmail}"/>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label Content="Expiration Date" />
+                    <DatePicker x:Name="ExpirationDatePicker"
+                                SelectedDate="{Binding ExpirationDate}"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Quantity" />
+                    <ComboBox x:Name="QuantityCombobox"
+                              SelectedItem="{Binding SelectedQuantity}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel >
+                    <Label Content="Product Features" />
+                    <!--<ComboBox x:Name="FeaturesComboBox"
+                              ItemsSource="{Binding Features}"
+                              SelectedItem="{Binding SelectedFeature}"
+                              DisplayMemberPath="Name"/>-->
+                    <ListBox x:Name="FeaturesListBox"
+                             ItemsSource="{Binding Features}"
+                            DisplayMemberPath="Name"
+                             SelectionChanged="FeaturesListBox_OnSelectionChanged"/>
+                </StackPanel>
+                <StackPanel >
+                    <Label Content="License Type" />
+                    <ComboBox x:Name="LicenseTypeComboBox"
+                              SelectedItem="{Binding SelectedLicenseType}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="3">
+            <Button x:Name="CreateLicenseButton" Content="Create License"
+                    Width="128" Height="32"
+                    Click="CreateLicenseButton_OnClick" />
+            <TextBox x:Name="CreatedLicenseTextBox" TextWrapping="Wrap" />
+        </StackPanel>
+        <Button Grid.Row="1" Grid.Column="1" x:Name="ValidateButton" Content="Validate License"
+                Width="128" Height="32"
+                Click="ValidateButton_OnClick" />
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="ValidateResultTextBox"
+                 TextWrapping="Wrap" />
+    </Grid>
+</Window>
